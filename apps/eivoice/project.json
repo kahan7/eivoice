@@ -44,19 +44,20 @@
       "executor": "nx:noop"
     },
     "serve": {
-      "continuous": true,
-      "executor": "@nx/js:node",
+      "executor": "nx:run-commands",
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "eivoice:build",
-        "runBuildTargetDependencies": false
+        "command": "node dist/apps/eivoice/main.js",
+        "cwd": "{workspaceRoot}"
       },
       "configurations": {
         "development": {
+          "command": "node dist/apps/eivoice/main.js",
           "buildTarget": "eivoice:build:development"
         },
         "production": {
+          "command": "node dist/apps/eivoice/main.js",
           "buildTarget": "eivoice:build:production"
         }
       }
