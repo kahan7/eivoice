@@ -1,7 +1,7 @@
 {
-  "name": "bff",
+  "name": "invoice",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/bff/src",
+  "sourceRoot": "apps/invoice/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -10,7 +10,7 @@
       "options": {
         "command": "webpack-cli build",
         "args": ["--node-env=production"],
-        "cwd": "apps/bff"
+        "cwd": "apps/invoice"
       },
       "configurations": {
         "development": {
@@ -22,7 +22,10 @@
       "dependsOn": ["build"],
       "cache": true,
       "executor": "@nx/js:prune-lockfile",
-      "outputs": ["{workspaceRoot}/dist/apps/bff/package.json", "{workspaceRoot}/dist/apps/bff/package-lock.json"],
+      "outputs": [
+        "{workspaceRoot}/dist/apps/invoice/package.json",
+        "{workspaceRoot}/dist/apps/invoice/package-lock.json"
+      ],
       "options": {
         "buildTarget": "build"
       }
@@ -30,7 +33,7 @@
     "copy-workspace-modules": {
       "dependsOn": ["build"],
       "cache": true,
-      "outputs": ["{workspaceRoot}/dist/apps/bff/workspace_modules"],
+      "outputs": ["{workspaceRoot}/dist/apps/invoice/workspace_modules"],
       "executor": "@nx/js:copy-workspace-modules",
       "options": {
         "buildTarget": "build"
@@ -40,10 +43,17 @@
       "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
       "executor": "nx:noop"
     },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "TS_NODE_PROJECT=apps/invoice/tsconfig.app.json TS_CONFIG_PATH=tsconfig.base.json npx ts-node-dev --respawn --transpile-only -r tsconfig-paths/register apps/invoice/src/main.ts",
+        "cwd": "{workspaceRoot}"
+      }
+    },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "TS_NODE_PROJECT=apps/bff/tsconfig.app.json TS_CONFIG_PATH=tsconfig.base.json npx ts-node-dev --respawn --transpile-only -r tsconfig-paths/register apps/bff/src/main.ts",
+        "command": "TS_NODE_PROJECT=apps/invoice/tsconfig.app.json TS_CONFIG_PATH=tsconfig.base.json npx ts-node-dev --respawn --transpile-only -r tsconfig-paths/register apps/invoice/src/main.ts",
         "cwd": "{workspaceRoot}"
       }
     },
