@@ -2,8 +2,8 @@ import { Controller, Get, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ResponseDto } from '@common/interfaces/gateway/response.interface';
 import { ClientProxy } from '@nestjs/microservices';
-import { firstValueFrom } from 'rxjs';
-
+import { ProcessId } from '@common/decorators/precessId.decorator';
+import { map } from 'rxjs';
 @Controller('app')
 export class AppController {
   constructor(
@@ -16,9 +16,14 @@ export class AppController {
     const result = this.appService.getData();
     return new ResponseDto({ data: result });
   }
+
   @Get('invoice')
-  async getInvoice() {
-    const result = await firstValueFrom(this.invoiceClient.send<string, number>('get_invoice', 2));
-    return new ResponseDto<string>({ data: result });
+  async getInvoice(@ProcessId() processId: string) {
+    return this.invoiceClient
+      .send<string, { processId: string; data: { invoiceId: number; invoiceName: string } }>('get_invoice', {
+        processId,
+        data: { invoiceId: 1, invoiceName: 'Hoa don 1' },
+      })
+      .pipe(map((data) => new ResponseDto<string>({ data })));
   }
 }
