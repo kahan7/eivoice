@@ -24,5 +24,16 @@
       "@common/interceptors/*": ["libs/interceptors/src/lib/*"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "dist",
+    "out-tsc",
+    ".nx/cache",
+    ".nx/workspace-data",
+    "docker/docker_data",
+    "docker/**/docker_data",
+    "coverage",
+    "*.log"
+  ]
 }

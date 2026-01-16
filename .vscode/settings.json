@@ -1,0 +1,22 @@
+{
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.nx/**": true,
+    "**/docker/docker_data/**": true,
+    "**/coverage/**": true,
+    "**/*.log": true,
+    "**/*.lock": true,
+    "**/*.wt": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.nx": true,
+    "**/docker/docker_data": true,
+    "**/coverage": true,
+    "**/*.log": true,
+    "**/*.lock": true,
+    "**/*.wt": true
+  }
+}
