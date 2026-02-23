@@ -21,7 +21,8 @@
       "@common/middlewares/*": ["libs/middlewares/src/lib/*"],
       "@common/utils/*": ["libs/utils/src/lib/*"],
       "@common/interfaces/*": ["libs/interface/src/lib/*"],
-      "@common/interceptors/*": ["libs/interceptors/src/lib/*"]
+      "@common/interceptors/*": ["libs/interceptors/src/lib/*"],
+      "@common/schemas/*": ["libs/schemas/src/lib/*"]
     }
   },
   "exclude": [
