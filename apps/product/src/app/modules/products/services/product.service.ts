@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ProductRepository } from '../repositories/product.repository';
 import { CreateProductTcpRequest } from '@common/interfaces/tcp/product';
 @Injectable()
@@ -8,7 +8,7 @@ export class ProductService {
     const { sku, name } = data;
     const exist = await this.productRepository.exists(sku, name);
     if (exist) {
-      throw new Error('Product with this SKU already exists');
+      throw new BadRequestException('Product with this SKU already exists');
     }
     return this.productRepository.create(data);
   }

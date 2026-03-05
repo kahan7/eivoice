@@ -16,6 +16,6 @@ export class AppModule {
   static CONFIGURATION: TConfiguration = CONFIGURATION;
 
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('cats');
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
