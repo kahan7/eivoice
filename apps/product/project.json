@@ -42,19 +42,18 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@nx/js:node",
+      "executor": "nx:run-commands",
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "product:build",
-        "runBuildTargetDependencies": false
+        "command": "node /Users/nguyenminhkhang/Documents/Learn/eivoice/dist/apps/product/main.js"
       },
       "configurations": {
         "development": {
-          "buildTarget": "product:build:development"
+          "command": "node --watch /Users/nguyenminhkhang/Documents/Learn/eivoice/dist/apps/product/main.js"
         },
         "production": {
-          "buildTarget": "product:build:production"
+          "command": "node /Users/nguyenminhkhang/Documents/Learn/eivoice/dist/apps/product/main.js"
         }
       }
     },
