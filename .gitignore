@@ -44,3 +44,7 @@ Thumbs.db
 # Docker
 docker/**/docker_data
 docker/**/docker_data/**
+
+# Next.js
+.next
+out
