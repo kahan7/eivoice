@@ -7,6 +7,7 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { map } from 'rxjs';
 import { CreateUserTcpRequest } from '@common/interfaces/tcp/user';
 import { TCP_REQUEST_MESSAGES } from '@common/constants/enum/tcp-request-message.enum';
+import { CreateUserRequestDto } from '@common/interfaces/gateway/user';
 
 @ApiTags('User')
 @Controller('user')
@@ -20,7 +21,7 @@ export class UserController {
   @ApiOperation({
     summary: 'Create a new user',
   })
-  create(@Body() body: CreateUserTcpRequest, @ProcessId() processId: string) {
+  create(@Body() body: CreateUserRequestDto, @ProcessId() processId: string) {
     return this.userAccessClient
       .send<string, CreateUserTcpRequest>(TCP_REQUEST_MESSAGES.USER.CREATE, {
         data: body,
