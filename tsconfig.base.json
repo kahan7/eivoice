@@ -24,7 +24,8 @@
       "@common/interceptors/*": ["libs/interceptors/src/lib/*"],
       "@common/schemas/*": ["libs/schemas/src/lib/*"],
       "@common/decorators/*": ["libs/decorators/src/lib/*"],
-      "@common/entities/*": ["libs/entities/src/lib/*"]
+      "@common/entities/*": ["libs/entities/src/lib/*"],
+      "@common/guards/*": ["libs/guard/src/lib/*"]
     }
   },
   "exclude": [
