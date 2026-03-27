@@ -16,10 +16,13 @@ enum PRODUCT {
 enum KEYCLOAK {
   CREATE_USER = 'keycloak.create_user',
 }
+enum AUTHORIZER {
+  LOGIN = 'authorize.login',
+}
 
 enum USER {
   CREATE = 'user.create',
   GET_BY_ALL = 'user.get_all',
 }
 
-export const TCP_REQUEST_MESSAGES = { INVOICE, PRODUCT, USER, KEYCLOAK };
+export const TCP_REQUEST_MESSAGES = { INVOICE, PRODUCT, USER, KEYCLOAK, AUTHORIZER };
