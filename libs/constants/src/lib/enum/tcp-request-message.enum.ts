@@ -18,6 +18,7 @@ enum KEYCLOAK {
 }
 enum AUTHORIZER {
   LOGIN = 'authorize.login',
+  VERIFY_USER_TOKEN = 'authorize.verify_user_token',
 }
 
 enum USER {

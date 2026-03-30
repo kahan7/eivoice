@@ -4,7 +4,7 @@ import { MessagePattern } from '@nestjs/microservices';
 import { TcpLoggingInterceptor } from '@common/interceptors/tcpLogging.interceptor';
 import { TCP_REQUEST_MESSAGES } from '@common/constants/enum/tcp-request-message.enum';
 import { RequestParams } from '@common/decorators/request-param.decorator';
-import { LoginTcpRequest, LoginTcpResponse } from '@common/interfaces/tcp/authorizer';
+import { AuthorizeResponse, LoginTcpRequest, LoginTcpResponse } from '@common/interfaces/tcp/authorizer';
 import { Response } from '@common/interfaces/tcp/common/response.interface';
 
 import { AuthorizerService } from '../services/authorizer.service';
@@ -19,5 +19,11 @@ export class AuthorizerController {
     const data = await this.authorizerService.login(params);
 
     return Response.success<LoginTcpResponse>(data);
+  }
+
+  @MessagePattern(TCP_REQUEST_MESSAGES.AUTHORIZER.VERIFY_USER_TOKEN)
+  async verifyUserToken(@RequestParams() token: string) {
+    const result = await this.authorizerService.verifyUserToken(token);
+    return Response.success<AuthorizeResponse>(result);
   }
 }
