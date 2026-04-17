@@ -24,6 +24,7 @@ enum AUTHORIZER {
 enum USER {
   CREATE = 'user.create',
   GET_BY_ALL = 'user.get_all',
+  GET_BY_USER_ID = 'user.get_by_user_id',
 }
 
 export const TCP_REQUEST_MESSAGES = { INVOICE, PRODUCT, USER, KEYCLOAK, AUTHORIZER };

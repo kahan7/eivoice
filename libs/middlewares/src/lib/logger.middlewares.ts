@@ -1,17 +1,18 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { getProcessId } from '@common/utils/string.utils';
 import { MetaDataKeys } from '@common/constants/common.constant';
+import { RequestWithMetadata } from '@common/interfaces/common/request.interface';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-  use(req: Request, res: Response, next: NextFunction) {
+  use(req: RequestWithMetadata, res: Response, next: NextFunction) {
     const startTime = Date.now();
     const { method, originalUrl, body } = req;
     const processId = getProcessId();
 
-    (req as any)[MetaDataKeys.PROCESS_ID] = processId;
-    (req as any)[MetaDataKeys.START_TIME] = startTime;
+    req[MetaDataKeys.PROCESS_ID] = processId;
+    req[MetaDataKeys.START_TIME] = startTime;
 
     const now = Date.now();
 
@@ -23,7 +24,7 @@ export class LoggerMiddleware implements NestMiddleware {
 
     const originalSend = res.send.bind(res);
 
-    res.send = (body: any) => {
+    res.send = (body: unknown) => {
       const durationMs = Date.now() - startTime;
 
       Logger.log(

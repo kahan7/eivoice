@@ -10,6 +10,8 @@ import { ProcessId } from '@common/decorators/precessId.decorator';
 import { TCP_REQUEST_MESSAGES } from '@common/constants/enum/tcp-request-message.enum';
 import { InvoiceTcpResponse, CreateInvoiceTcpRequest } from '@common/interfaces/tcp/invoice';
 import { Authorization } from '@common/decorators/authorizer.decorator';
+import { UserData } from '@common/decorators/userData.decorator';
+import { AuthorizeResponse } from '@common/interfaces/tcp/authorizer/authorizer.response.interface';
 @ApiTags('Invoice')
 @Controller('invoice')
 export class InvoiceController {
@@ -18,7 +20,12 @@ export class InvoiceController {
   @ApiOkResponse({ type: ResponseDto<CreateInvoiceRequestDto> })
   @ApiOperation({ summary: 'Create a new invoice' })
   @Authorization({ secured: true })
-  create(@Body() body: CreateInvoiceRequestDto, @ProcessId() processId: string) {
+  create(
+    @Body() body: CreateInvoiceRequestDto,
+    @ProcessId() processId: string,
+    @UserData() userData: AuthorizeResponse,
+  ) {
+    console.log('userData', userData);
     return this.invoiceClient
       .send<InvoiceTcpResponse, CreateInvoiceTcpRequest>(TCP_REQUEST_MESSAGES.INVOICE.CREATE, {
         data: body,

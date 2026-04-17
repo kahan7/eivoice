@@ -7,7 +7,7 @@
     "nx:reset": "nx reset",
     "nx:run-many": "nx run-many",
     "dev": "yarn nx:reset && yarn nx:run-many -t serve",
-    "dev-lite": "yarn dev --projects=bff,user-access,authorizer,invoice"
+    "dev-lite": "yarn dev --projects=bff,user-access,authorizer,invoice --parallel=4"
   },
   "private": true,
   "dependencies": {
